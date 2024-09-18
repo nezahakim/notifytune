@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUsers, FaStar, FaInfoCircle } from "react-icons/fa";
+import { format } from "date-fns";
 import { motion } from "framer-motion";
 
 const LiveWelcome = ({ roomInfo, membersCount }) => {
+  const [CreateDate, setCreateDate] = useState(null);
+  useEffect(() => {
+    if (roomInfo) {
+      setCreateDate(format(new Date(roomInfo?.started_at), "MMM d, yyyy"));
+    }
+  });
   const getRandomEmoji = () => {
     const emojis = [
       "🚀",
@@ -69,7 +76,7 @@ const LiveWelcome = ({ roomInfo, membersCount }) => {
         </div>
         <div className="flex items-center justify-center">
           <FaInfoCircle className="mr-2" />
-          <span>Created on {roomInfo?.started_at}</span>
+          <span>Created on {CreateDate}</span>
         </div>
       </motion.div>
       <motion.p

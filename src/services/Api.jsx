@@ -3,13 +3,14 @@ import axios from "axios";
 const a =
   "https://0d3a37b3-590d-4da3-892e-347bbc5cb91e-00-1gsjkthjnxlbp.spock.replit.dev/api";
 // Base URL for API requests
-const API_BASE_URL = "https://talkie-back.vercel.app/api";
-const WS_BASE_URL = "wss://talkie-back.vercel.app/ws";
+// const API_BASE_URL = "https://talkie-back.vercel.app/api";
+const WS_BASE_URL = "wss://talkie-backend-pobo.onrender.com/ws";
+const API_BASE_URL = "https://talkie-backend-pobo.onrender.com";
 
 class Api {
   constructor() {
     this.axios = axios.create({
-      baseURL: a,
+      baseURL: API_BASE_URL,
     });
 
     this.axios.interceptors.request.use((config) => {

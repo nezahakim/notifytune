@@ -16,14 +16,8 @@ const LiveStreamLayout = ({ minimize }) => {
   const token = localStorage.getItem("token");
   const chatRef = useRef(null);
 
-  const {
-    messages,
-    ListAllChats,
-    sendMessage,
-    deleteMessage,
-    pinMessage,
-    unpinMessage,
-  } = useChatController(sessionId, userId, token);
+  const { messages, ListAllChats, sendMessage, deleteMessage } =
+    useChatController(sessionId, userId, token);
 
   if (messages.length < 1) {
     ListAllChats();
@@ -84,7 +78,7 @@ const LiveStreamLayout = ({ minimize }) => {
         <div className="flex-1 flex flex-col bg-opacity-70">
           <div className="flex-1 flex overflow-hidden">
             <div className="flex-grow flex flex-col overflow-hidden">
-              <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300 py-4 w-full">
+              <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300 w-full">
                 <LiveWelcome
                   roomInfo={roomInfo}
                   membersCount={members?.length || 0}
@@ -95,8 +89,6 @@ const LiveStreamLayout = ({ minimize }) => {
                       message={message}
                       communityData={communityData}
                       deleteMessage={deleteMessage}
-                      pinMessage={pinMessage}
-                      unpinMessage={unpinMessage}
                     />
                   ))}
                 </div>
@@ -106,7 +98,11 @@ const LiveStreamLayout = ({ minimize }) => {
             <div className="w-1/5 border-l border-gray-700 flex flex-col">
               <div className="flex-grow"></div>
               <div className="h-1/1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-300">
-                <LiveSpeakers />
+                <LiveSpeakers
+                  chatId={sessionId}
+                  userId={userId}
+                  token={token}
+                />
               </div>
             </div>
           </div>

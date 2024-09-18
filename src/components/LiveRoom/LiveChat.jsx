@@ -2,13 +2,7 @@ import React, { useMemo } from "react";
 import { format } from "date-fns";
 import { FaThumbtack } from "react-icons/fa";
 
-const Chat = ({
-  message,
-  communityData,
-  unpinMessage,
-  pinMessage,
-  deleteMessage,
-}) => {
+const Chat = ({ message, communityData, deleteMessage }) => {
   const userId = localStorage.getItem("user_id");
   const isAdmin = !true;
 
@@ -75,14 +69,6 @@ const Chat = ({
       </div>
       {isAdmin && (
         <div>
-          <button
-            onClick={() =>
-              message.pinned ? unpinMessage(message.id) : pinMessage(message.id)
-            }
-            className="text-gray-400 hover:text-white transition duration-300 mr-2"
-          >
-            {message.pinned ? "Unpin" : "Pin"}
-          </button>
           <button
             onClick={() => deleteMessage(message.id)}
             className="text-gray-400 hover:text-white transition duration-300"
